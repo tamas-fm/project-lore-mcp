@@ -1,0 +1,10 @@
+node_modules/
+dist/
+coverage/
+*.log
+*.tgz
+.DS_Store
+.env*
+
+# Regenerable local index data — never commit (see docs/architecture.md)
+.project-lore/

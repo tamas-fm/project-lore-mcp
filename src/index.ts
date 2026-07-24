@@ -1,0 +1,11 @@
+export { loadConfig, type ProjectConfig, type SourceConfig } from "./config.js";
+export { ContextEngine, documentId, resolveLinkTarget } from "./engine.js";
+export { createServer } from "./server.js";
+export { routeTask, searchKnowledge, type EvidenceResult, type RouteTaskResult } from "./retrieval.js";
+export { parseMarkdown, redactSecrets } from "./parse.js";
+export { classify } from "./classify.js";
+export { extractTaskRoutes, extractRelationHints } from "./manifest.js";
+export { scanSource } from "./scan.js";
+export { IndexStore } from "./db.js";
+export { NullCodeIntelligenceProvider } from "./providers/null-provider.js";
+export * from "./types.js";

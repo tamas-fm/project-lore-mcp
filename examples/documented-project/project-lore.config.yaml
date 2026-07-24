@@ -1,0 +1,18 @@
+# Example configuration for project-lore-mcp.
+# Paths are relative to this project's root directory.
+sources:
+  - id: repository
+    type: directory
+    path: .
+    authority: canonical
+
+  # Simulated external documentation root (outside the repository).
+  - id: design-handoff
+    type: directory
+    path: ../external-docs
+    authority: design
+
+classification:
+  rules:
+    - pattern: "docs/legacy/**"
+      authority: historical
