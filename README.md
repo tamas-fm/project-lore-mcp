@@ -40,17 +40,36 @@ Point it at a repository (plus optional external documentation roots). It:
 Requires Node.js ≥ 22.
 
 ```bash
-npm install
-npm run build
-node dist/cli.js index --root /path/to/your/repo   # one-shot index + stats
-node dist/cli.js serve --root /path/to/your/repo   # stdio MCP server
+npm install -g project-lore-mcp   # or npx -y project-lore-mcp (no install needed)
+project-lore index --root /path/to/your/repo   # one-shot index + stats
+project-lore serve --root /path/to/your/repo   # stdio MCP server
 ```
 
 ### Claude Code
 
+Run this once from inside the repository you want to index:
+
 ```bash
-claude mcp add project-lore -- node /path/to/project-lore-mcp/dist/cli.js serve --root /path/to/your/repo
+# Personal setup — stored in your local Claude Code config, not committed
+claude mcp add project-lore --scope local -- \
+  npx -y project-lore-mcp serve --root "$PWD"
 ```
+
+For teams, commit a shared configuration instead:
+
+```bash
+# Shared setup — writes .mcp.json into the repository
+claude mcp add project-lore --scope project -- \
+  npx -y project-lore-mcp serve --root .
+```
+
+The project scope uses a relative root (`.`) so it works on any checkout.
+Claude Code will ask each user to approve project-scoped servers before
+running them.
+
+> **One repository, one configuration.** Project Lore's command contains a
+> fixed root path, so it always indexes one specific repository. Register it
+> separately per repository rather than globally.
 
 It coexists with codebase-memory-mcp — configure both; they own different
 questions. If your configuration references documentation outside the
@@ -107,4 +126,4 @@ See [docs/configuration.md](docs/configuration.md) for the full reference and
 v0.1.0 — first vertical slice. See [docs/architecture.md](docs/architecture.md),
 the ADRs in [docs/adr/](docs/adr/), and [CONTRIBUTING.md](CONTRIBUTING.md).
 
-License: MIT (maintainer sign-off pending before first publish).
+License: MIT.
