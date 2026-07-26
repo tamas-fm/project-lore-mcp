@@ -19,6 +19,8 @@ jobs:
         with:
           node-version: ${{ matrix.node }}
           cache: npm
+      - uses: ilammy/msvc-dev-cmd@v1
+        if: runner.os == 'Windows'
       - run: npm ci
       - run: npm run typecheck
       - run: npm run build
